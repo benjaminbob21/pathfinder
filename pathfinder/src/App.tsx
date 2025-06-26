@@ -1,20 +1,18 @@
 
 import { Login } from './components/Login';
-import React, { useState } from 'react';
+import React from 'react';
+import { useMsal } from '@azure/msal-react';
 
 
 function App() {
-  // Mock login state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // State for sign out dropdown
-  const [showSignOut, setShowSignOut] = useState(false);
+  const { instance, accounts } = useMsal();
+  const account = accounts[0];
+  const [showSignOut, setShowSignOut] = React.useState(false);
 
-  // Mock user data
-  const mockUser = {
-    name: 'Amina Yusuf',
-    email: 'amina.yusuf@example.com',
-    avatar: 'https://ui-avatars.com/api/?name=Amina+Yusuf&background=0078d4&color=fff&size=128',
-  };
+  const isLoggedIn = !!account;
+  const userName = account?.name || '';
+  const userEmail = account?.username || '';
+  const userAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(userName || 'User')}&background=0078d4&color=fff&size=128`;
 
   return (
     <div style={{ minHeight: '100vh', width: '100vw', background: 'linear-gradient(135deg, #e3f0ff 0%, #f8fafd 100%)' }}>
@@ -38,12 +36,6 @@ function App() {
               <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                 <Login />
               </div>
-              <button
-                style={{ marginTop: 16, background: '#e0e7ef', color: '#0078d4', border: 'none', borderRadius: 4, padding: '10px 20px', cursor: 'pointer', fontWeight: 600, fontSize: 16, boxShadow: '0 1px 4px rgba(0,120,212,0.06)' }}
-                onClick={() => setIsLoggedIn(true)}
-              >
-                Mock Login
-              </button>
             </div>
           </div>
         </div>
@@ -60,11 +52,11 @@ function App() {
             background: 'transparent',
           }}>
             <h2 style={{ fontFamily: 'Segoe UI', color: '#0078d4', fontWeight: 700, fontSize: 28, margin: 0 }}>
-              Welcome {mockUser.name} to Pathfinder
+              Welcome {userName} to Pathfinder
             </h2>
             <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
               <img
-                src={mockUser.avatar}
+                src={userAvatar}
                 alt="avatar"
                 style={{ borderRadius: '50%', width: 48, height: 48, boxShadow: '0 2px 8px #0078d420', cursor: 'pointer' }}
                 onClick={() => setShowSignOut((v) => !v)}
@@ -96,9 +88,9 @@ function App() {
                       padding: '10px 0',
                       cursor: 'pointer',
                     }}
-                    onClick={() => {
+                    onClick={async () => {
                       setShowSignOut(false);
-                      setIsLoggedIn(false);
+                      await instance.logoutPopup();
                     }}
                   >
                     Sign out

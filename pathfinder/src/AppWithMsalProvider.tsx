@@ -4,8 +4,8 @@ import App from "./App";
 
 const msalConfig = {
   auth: {
-    clientId: "YOUR_CLIENT_ID_HERE", // TODO: Replace with your Azure AD app client ID
-    authority: "https://login.microsoftonline.com/common",
+    clientId: import.meta.env.VITE_AZURE_CLIENT_ID!,
+    authority: import.meta.env.VITE_AZURE_AUTHORITY!,
     redirectUri: window.location.origin,
   },
 };
