@@ -24,8 +24,14 @@ const logoStyle: React.CSSProperties = {
 export const Login: React.FC = () => {
   const { instance } = useMsal();
 
-  const handleLogin = () => {
-    instance.loginPopup();
+  const handleLogin = async () => {
+    // await instance.loginPopup({
+    //   scopes: ["Mail.Read", "Calendars.Read", "Files.Read"],
+    // });
+    const loginResponse = await instance.loginPopup({
+      scopes: ["User.Read"],
+    });
+    instance.setActiveAccount(loginResponse.account);
   };
 
   return (
