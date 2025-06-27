@@ -28,7 +28,14 @@ function App() {
             textAlign: 'center',
             border: '1.5px solid #e0e7ef',
           }}>
-            <h1 style={{ fontFamily: 'Segoe UI', color: '#0078d4', fontWeight: 800, fontSize: 36, marginBottom: 10, letterSpacing: '-1px' }}>Welcome to Pathfinder</h1>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 10 }}>
+              <img 
+                src="/pathfinderlogo.png" 
+                alt="Pathfinder Logo" 
+                style={{ width: 96, height: 96, objectFit: 'contain', marginBottom: 0 }} 
+              />
+              <h1 style={{ fontFamily: 'Segoe UI', color: '#0078d4', fontWeight: 800, fontSize: 36, margin: 0, letterSpacing: '-1px' }}>Welcome to Pathfinder</h1>
+            </div>
             <p style={{ color: '#2b2b2b', fontSize: 20, marginBottom: 36, fontWeight: 500, opacity: 0.85 }}>
               Empowering your journey: actionable career insights for every path.
             </p>
@@ -51,9 +58,35 @@ function App() {
             boxSizing: 'border-box',
             background: 'transparent',
           }}>
-            <h2 style={{ fontFamily: 'Segoe UI', color: '#0078d4', fontWeight: 700, fontSize: 28, margin: 0 }}>
-              Welcome {userName} to Pathfinder
-            </h2>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              background: 'linear-gradient(90deg, #e3f0ff 75%, #e6f2fb 100%)',
+              borderRadius: 16,
+              boxShadow: '0 2px 12px #0078d420',
+              padding: '14px 38px 14px 24px',
+              marginRight: 8,
+              gap: 24,
+              border: '1.5px solid #b3d6f6',
+            }}>
+              <img 
+                src="/pathfinderlogo.png" 
+                alt="Pathfinder Logo" 
+                style={{ width: 64, height: 64, objectFit: 'contain', display: 'block', filter: 'drop-shadow(0 2px 8px #0078d420)' }} 
+              />
+              <h2 style={{
+                fontFamily: 'Segoe UI',
+                color: '#0078d4',
+                fontWeight: 900,
+                fontSize: 34,
+                margin: 0,
+                letterSpacing: '-1px',
+                lineHeight: 1.05,
+                textShadow: '0 2px 8px #e3f0ff',
+              }}>
+                Welcome, {userName}
+              </h2>
+            </div>
             <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 16 }}>
               <img
                 src={userAvatar}
