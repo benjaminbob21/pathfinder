@@ -3,7 +3,7 @@ import cors from "cors";
 import path from "path";
 import "dotenv/config";
 import graphRoutes from "./routes/AzureRoute";
-import openaiRoutes from "./routes/AzureOpenAi";
+import openaiRoutes from "./routes/AzureOpenAI";
 
 const app = express();
 
